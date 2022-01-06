@@ -46,6 +46,7 @@
                 <Label Content="Entropy bit:" Foreground="White" FontFamily="Eras ITC" FontSize="12" VerticalAlignment="Center"></Label>
                 <Label Content="1" Foreground="White" FontFamily="Eras ITC" FontSize="22" Name="entropyBit" HorizontalAlignment="Left"></Label>
             </StackPanel>
+            <Label Foreground="White" FontFamily="Eras ITC" FontSize="12" Content="" HorizontalAlignment="Center" Name="entropyMessage"></Label>
         </StackPanel>
 
     </Grid>

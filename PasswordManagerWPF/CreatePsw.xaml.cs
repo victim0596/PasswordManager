@@ -44,13 +44,15 @@ namespace PasswordManagerWPF
         //generate Button
         private void generatePsw(object sender, RoutedEventArgs e)
         {
-            //generate psw
+            EntropyCalc entropyCalc = new EntropyCalc();
             GenPassword genPassword = new GenPassword();
+            //generate psw
             string password = genPassword.generate(isNumeric.IsChecked ?? false, isAlphabetic.IsChecked ?? false, isSimbol.IsChecked ?? false, pswLength.Value);
             generatedPsw.Content = password;
             //calculate entropy
-            EntropyCalc entropyCalc = new EntropyCalc();
-            entropyBit.Content = entropyCalc.entropy(pswLength.Value);
+            string entropyValue = entropyCalc.entropy(pswLength.Value);
+            entropyBit.Content = entropyValue;
+            entropyCalc.entropyTips(entropyValue, entropyMessage);
             MessageBox.Show("Password generated!");
         }
     }
