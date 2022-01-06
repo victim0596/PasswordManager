@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using PasswordManagerWPF.Classes;
 
 
 namespace PasswordManagerWPF
@@ -38,6 +39,11 @@ namespace PasswordManagerWPF
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
             e.Handled = true;
+        }
+        private void savedPswPage(object sender, RoutedEventArgs e)
+        {
+            if (globalVar.userLogged) this.NavigationService.Navigate(new SavedPassword());
+            else this.NavigationService.Navigate(new Login());
         }
     }
 }

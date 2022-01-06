@@ -18,15 +18,15 @@
         </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Vertical">
-                <Button Content="Create Password" FontSize="18" FontFamily="Eras ITC" FontWeight="Bold" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="createPswPage"/>
-                <Button Content="Saved Password" FontSize="18" FontFamily="Eras ITC" FontWeight="Bold" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}"></Button>
+                <Button Content="Create Password" FontSize="18" FontFamily="Eras ITC" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="createPswPage"/>
+                <Button Content="Saved Password" FontSize="18" FontFamily="Eras ITC" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="savedPswPage"></Button>
             </StackPanel>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15">
             <TextBlock>           
                 <Hyperlink NavigateUri="https://github.com/victim0596/password-manager" RequestNavigate="Hyperlink_RequestNavigate">
                    <Label Content="Design by Terzo Oliver" Foreground="white" FontSize="10" FontFamily="Eras ITC"></Label>
-                </Hyperlink>    
+                </Hyperlink>
             </TextBlock>
         </StackPanel>
     </Grid>
