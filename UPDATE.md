@@ -1,0 +1,8 @@
+# Update
+
+In this file, i write all idea for update the app
+
+- Change UI of the application
+- Add in the create password page, a filter that allow to exclude a char/number/simbol for the creation of the custom password
+- Add the possibility to copy the password saved in the saved password page
+- Add in the create password page, the possibility to directly save the generated password in the app database 
