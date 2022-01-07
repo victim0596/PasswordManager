@@ -24,7 +24,7 @@
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15">
             <TextBlock>           
-                <Hyperlink NavigateUri="https://github.com/victim0596/password-manager" RequestNavigate="Hyperlink_RequestNavigate">
+                <Hyperlink NavigateUri="https://github.com/victim0596/PasswordManager" RequestNavigate="Hyperlink_RequestNavigate">
                    <Label Content="Design by Terzo Oliver" Foreground="white" FontSize="10" FontFamily="Eras ITC"></Label>
                 </Hyperlink>
             </TextBlock>
