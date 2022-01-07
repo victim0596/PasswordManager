@@ -38,7 +38,7 @@ namespace PasswordManagerWPF.Classes
         }
         public void registerUser(string username, string password)
         {
-
+            if (this.checkIfExistUser()) throw new Exception("Only one account is permitted");
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string insertUser = "INSERT INTO users (username, password) VALUES ($username, $password);";
             cmd.CommandText = insertUser;
@@ -91,6 +91,22 @@ namespace PasswordManagerWPF.Classes
             cmd.Parameters.AddWithValue("$password", password);
             cmd.Parameters.AddWithValue("$sitename", appName);
             cmd.ExecuteNonQuery();
+        }
+
+        public bool checkIfExistUser()
+        {
+            SQLiteCommand cmd = this.connectionDb.CreateCommand();
+            SQLiteDataReader sQLiteDataReader;
+            string checkUser = "SELECT * FROM users";
+            cmd.CommandText = checkUser;
+            sQLiteDataReader = cmd.ExecuteReader();
+            string dbUsername = "";
+            while (sQLiteDataReader.Read())
+            {
+                dbUsername = sQLiteDataReader.GetString(0);
+            }
+            if (!string.IsNullOrEmpty(dbUsername)) return true;
+            else return false;
         }
     }
 }
