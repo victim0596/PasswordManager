@@ -12,8 +12,9 @@ There is no release in this moment, but if you want, copy the project and compil
 
 ### _Create password_
 
-![Create Password](./imgGit/createPassword.png)
-![Create Password](./imgGit/createPassword2.png)
+<img src="./imgGit/createPassword.png" alt="Create Password" width="550"/>
+<img src="./imgGit/createPassword2.png" alt="Create Password" width="550"/>
+
 
 
 In this section of application, you can create your own password, using one of the filter on the top; with `Number` filter the generated password had number between 0-9, with `Alphabetic char` the generated password had char between a-zA-Z, with `Simbol` filter the generated password had all the simbol for example: ./;:{}[]"`!@ ...
@@ -27,8 +28,8 @@ For copy the generated password, there is a small `copy-button` on the right of 
 
 ### _Saved password_
 
-![Login](./imgGit/savedLogin.png)
-![Saved Password](./imgGit/savedPassword.png)
+<img src="./imgGit/savedLogin.png" alt="Login" width="550"/>
+<img src="./imgGit/savedPassword.png" alt="Saved Password" width="550"/>
 
 This section is protected by login interface, you can `register` an account for the application, `only one account is permitted`, or you can `login`, when the user is logged in he can see all the password saved in the application.
 
