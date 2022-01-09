@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using PasswordManagerWPF.GVariable;
 
 namespace PasswordManagerWPF.Classes
 {
@@ -36,31 +37,31 @@ namespace PasswordManagerWPF.Classes
             {
                 case < 17:
                     {
-                        message = "Very weak password, generate one more with more option or change length";
+                        message = LangString.tip1;
                         entropyLabel.Foreground = new SolidColorBrush(Colors.Red);
                         break;
                     }
                 case double n when (n >= 17 && n <= 36):
                     {
-                        message = "Weak password, generate one more with more option or change length";
+                        message = LangString.tip2;
                         entropyLabel.Foreground = new SolidColorBrush(Colors.Orange);
                         break;
                     }
                 case double n when (n > 36 && n <= 60):
                     {
-                        message = "Strong password, but I recommend that you generate one with more than 60 bits of entropy";
+                        message = LangString.tip3;
                         entropyLabel.Foreground = new SolidColorBrush(Colors.Yellow);
                         break;
                     }
                 case double n when (n > 60 && n <= 124):
                     {
-                        message = "Very strong password, very well";
+                        message = LangString.tip4;
                         entropyLabel.Foreground = new SolidColorBrush(Colors.GreenYellow);
                         break;
                     }
                 case > 125:
                     {
-                        message = "Password impossible to crack, even with all the computers in the universe together";
+                        message = LangString.tip5;
                         entropyLabel.Foreground = new SolidColorBrush(Colors.Green);
                         break;
                     }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.GVariable;
 
 namespace PasswordManagerWPF
 {
@@ -53,7 +54,7 @@ namespace PasswordManagerWPF
                 loginForm.isValidPsw(appNameText.Text, passwordText.Password.ToString(), usernameText.Text);
                 dbClass db = new dbClass();
                 db.insertPassword(appNameText.Text, usernameText.Text, passwordText.Password.ToString());
-                MessageBox.Show("Password Added !");
+                MessageBox.Show(LangString.pswAdded);
                 this.NavigationService.Navigate(new SavedPassword());
             }
             catch (Exception ex)

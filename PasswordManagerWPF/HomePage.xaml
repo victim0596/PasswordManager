@@ -3,9 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PasswordManagerWPF"
+      xmlns:local="clr-namespace:PasswordManagerWPF.GVariable"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="HomePage">
 
     <Grid>
@@ -16,10 +16,17 @@
                 </Button.Background>
             </Button>
         </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Margin="15">
+            <Button Width="32" Height="32" BorderBrush="Transparent"  Style="{DynamicResource BtnConfig}" Click="configBtn">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/gear.png" Stretch="UniformToFill" ></ImageBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Vertical">
-                <Button Content="Create Password" FontSize="18" FontFamily="Eras ITC" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="createPswPage"/>
-                <Button Content="Saved Password" FontSize="18" FontFamily="Eras ITC" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="savedPswPage"></Button>
+                <Button Content="{Binding Path=(local:LangString.createPswBtn)}" FontSize="18" FontFamily="Eras ITC" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="createPswPage"/>
+                <Button Content="{Binding Path=(local:LangString.savedPswBtn)}" FontSize="18" FontFamily="Eras ITC" Margin="20" Padding="10" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}" Click="savedPswPage"></Button>
             </StackPanel>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="15">

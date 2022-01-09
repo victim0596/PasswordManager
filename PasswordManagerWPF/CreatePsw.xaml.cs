@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.GVariable;
 
 namespace PasswordManagerWPF
 {
@@ -39,7 +40,7 @@ namespace PasswordManagerWPF
         private void btnCopyPsw(object sender, RoutedEventArgs e)
         {
             Clipboard.SetText(generatedPsw.Content.ToString());
-            MessageBox.Show("Password copied!");
+            MessageBox.Show(LangString.pswCopied);
         }
         //generate Button
         private void generatePsw(object sender, RoutedEventArgs e)
@@ -53,7 +54,7 @@ namespace PasswordManagerWPF
             string entropyValue = entropyCalc.entropy(pswLength.Value);
             entropyBit.Content = entropyValue;
             entropyCalc.entropyTips(entropyValue, entropyMessage);
-            MessageBox.Show("Password generated!");
+            MessageBox.Show(LangString.pswGenMes);
         }
     }
 }

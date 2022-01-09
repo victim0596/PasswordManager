@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:PasswordManagerWPF"
+      xmlns:local="clr-namespace:PasswordManagerWPF.GVariable"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CreatePsw">
@@ -24,17 +24,17 @@
         </StackPanel>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <CheckBox Content="Number" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isNumeric"></CheckBox>
-                <CheckBox Content="Alphabetic char" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isAlphabetic"></CheckBox>
-                <CheckBox Content="Simbol" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isSimbol"></CheckBox>
+                <CheckBox Content="{Binding Path=(local:LangString.number)}" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isNumeric"></CheckBox>
+                <CheckBox Content="{Binding Path=(local:LangString.character)}" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isAlphabetic"></CheckBox>
+                <CheckBox Content="{Binding Path=(local:LangString.simbol)}" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isSimbol"></CheckBox>
             </StackPanel>
             <StackPanel Margin="25" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Length" Foreground="White" Margin="0,0,10,0" FontFamily="Eras ITC" FontWeight="Normal"></Label>
+                <Label Content="{Binding Path=(local:LangString.length)}" Foreground="White" Margin="0,0,10,0" FontFamily="Eras ITC" FontWeight="Normal"></Label>
                 <Slider Width="120" VerticalAlignment="Center" Minimum="8" Maximum="22" Value="8" TickPlacement="None" Orientation="Horizontal" AutoToolTipPlacement="BottomRight" Name="pswLength"/>
             </StackPanel>
-            <Button Content="Generate" Width="150" FontSize="18" Foreground="White" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" FontFamily="Eras ITC" FontWeight="Bold" Padding="5" Style="{DynamicResource btnHome}" Click="generatePsw"></Button>
+            <Button Content="{Binding Path=(local:LangString.genPswBtn)}" Width="150" FontSize="18" Foreground="White" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" FontFamily="Eras ITC" FontWeight="Bold" Padding="5" Style="{DynamicResource btnHome}" Click="generatePsw"></Button>
             <StackPanel  Margin="0,25,0,0" Orientation="Horizontal">
-                <Label Content="Password Generated:" Foreground="White" FontSize="12" FontFamily="Eras ITC" VerticalAlignment="Center"></Label>
+                <Label Content="{Binding Path=(local:LangString.genPsw)}" Foreground="White" FontSize="12" FontFamily="Eras ITC" VerticalAlignment="Center"></Label>
                 <Label Content="12356" Foreground="White" FontFamily="Eras ITC" FontSize="22" Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Name="generatedPsw"></Label>
                 <Button Width="24" Height="24" HorizontalAlignment="Left" Margin="100,0,0,0" BorderBrush="Transparent" Style="{DynamicResource copyButton}" Click="btnCopyPsw">
                     <Button.Background>
@@ -43,7 +43,7 @@
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Entropy bit:" Foreground="White" FontFamily="Eras ITC" FontSize="12" VerticalAlignment="Center"></Label>
+                <Label Content="{Binding Path=(local:LangString.entropyBit)}" Foreground="White" FontFamily="Eras ITC" FontSize="12" VerticalAlignment="Center"></Label>
                 <Label Content="1" Foreground="White" FontFamily="Eras ITC" FontSize="22" Name="entropyBit" HorizontalAlignment="Left"></Label>
             </StackPanel>
             <Label Foreground="White" FontFamily="Eras ITC" FontSize="12" Content="" HorizontalAlignment="Center" Name="entropyMessage"></Label>

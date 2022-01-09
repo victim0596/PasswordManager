@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.GVariable;
 
 
 namespace PasswordManagerWPF
@@ -67,7 +68,7 @@ namespace PasswordManagerWPF
                 {
                     dbClass db = new dbClass();
                     db.registerUser(username.Text, password.Password.ToString());
-                    MessageBox.Show("User created!");
+                    MessageBox.Show(LangString.userCreated);
                 }
                 catch (Exception ex)
                 {

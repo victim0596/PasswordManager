@@ -45,5 +45,10 @@ namespace PasswordManagerWPF
             if (globalVar.userLogged) this.NavigationService.Navigate(new SavedPassword());
             else this.NavigationService.Navigate(new Login());
         }
+        private void configBtn(object sender, RoutedEventArgs e)
+        {
+            Configurator config = new Configurator();
+            config.ShowDialog();
+        }
     }
 }
