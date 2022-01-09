@@ -35,6 +35,7 @@ namespace PasswordManagerWPF.Classes
             cmd.ExecuteNonQuery();
             cmd.CommandText = queryPassword;
             cmd.ExecuteNonQuery();
+            this.connectionDb.Close();
         }
         public void registerUser(string username, string password)
         {
@@ -45,6 +46,7 @@ namespace PasswordManagerWPF.Classes
             cmd.Parameters.AddWithValue("$username", username);
             cmd.Parameters.AddWithValue("$password", password);
             cmd.ExecuteNonQuery();
+            this.connectionDb.Close();
         }
 
         public void loginUser(string username, string password)
@@ -63,6 +65,7 @@ namespace PasswordManagerWPF.Classes
                 dbUsername = sQLiteDataReader.GetString(0);
                 dbPassword = sQLiteDataReader.GetString(1);
             }
+            this.connectionDb.Close();
             if (string.IsNullOrEmpty(dbUsername) || string.IsNullOrEmpty(dbPassword)) throw new Exception("No user with this username");
             else globalVar.userLogged = true;
         }
@@ -79,6 +82,7 @@ namespace PasswordManagerWPF.Classes
             {
                 passwordManagers.Add(new passwordManager() { appName = sQLiteDataReader.GetString(1), password = sQLiteDataReader.GetString(2), username = sQLiteDataReader.GetString(3) });
             }
+            this.connectionDb.Close();
             return passwordManagers;
         }
 
@@ -91,6 +95,7 @@ namespace PasswordManagerWPF.Classes
             cmd.Parameters.AddWithValue("$password", password);
             cmd.Parameters.AddWithValue("$sitename", appName);
             cmd.ExecuteNonQuery();
+            this.connectionDb.Close();
         }
 
         public bool checkIfExistUser()
@@ -105,6 +110,7 @@ namespace PasswordManagerWPF.Classes
             {
                 dbUsername = sQLiteDataReader.GetString(0);
             }
+            this.connectionDb.Close();
             if (!string.IsNullOrEmpty(dbUsername)) return true;
             else return false;
         }
