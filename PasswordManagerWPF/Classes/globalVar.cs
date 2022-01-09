@@ -16,5 +16,8 @@ namespace PasswordManagerWPF.Classes
         public static int simbol;
         //for checking if user is logged
         public static bool userLogged;
+        //for configurator
+        public static string resolution;
+        public static string language;
     }
 }
