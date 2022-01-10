@@ -41,6 +41,15 @@ namespace PasswordManagerWPF
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+        //Close button
+        private void closeBtn(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
+        private void reduceBtn(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
     }
 }
