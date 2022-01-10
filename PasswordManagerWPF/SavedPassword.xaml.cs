@@ -35,11 +35,6 @@ namespace PasswordManagerWPF
                 MessageBox.Show(ex.Message);
             }
         }
-        //Close button
-        private void closeBtn(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
         //back Button
         private void backBtn(object sender, RoutedEventArgs e)
         {

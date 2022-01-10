@@ -9,13 +9,6 @@
       Title="Login">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Right" Margin="15">
-            <Button Width="32" Height="32" BorderBrush="Transparent"  Style="{DynamicResource ButtonClose}" Click="Button_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Assets/power.png" Stretch="UniformToFill" ></ImageBrush>
-                </Button.Background>
-            </Button>
-        </StackPanel>
         <StackPanel>
             <Button Width="32" Height="32" HorizontalAlignment="Left" Margin="20" BorderBrush="Transparent" Style="{DynamicResource BackButton}" Click="Button_Click_3">
                 <Button.Background>

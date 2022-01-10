@@ -29,11 +29,6 @@ namespace PasswordManagerWPF
             dbClass.createTable();
             InitializeComponent();
         }
-        //Close button
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
         //back Button
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {

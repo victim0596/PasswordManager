@@ -9,13 +9,6 @@
       Title="HomePage">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Right" Margin="15">
-            <Button Width="32" Height="32" BorderBrush="Transparent"  Style="{DynamicResource ButtonClose}" Click="Button_Click">
-                <Button.Background>
-                    <ImageBrush ImageSource="Assets/power.png" Stretch="UniformToFill" ></ImageBrush>
-                </Button.Background>
-            </Button>
-        </StackPanel>
         <StackPanel HorizontalAlignment="Left" Margin="15">
             <Button Width="32" Height="32" BorderBrush="Transparent"  Style="{DynamicResource BtnConfig}" Click="configBtn">
                 <Button.Background>

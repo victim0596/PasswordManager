@@ -27,10 +27,6 @@ namespace PasswordManagerWPF
         {
             InitializeComponent();
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
         private void createPswPage(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new CreatePsw());
