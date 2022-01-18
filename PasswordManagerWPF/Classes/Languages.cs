@@ -28,7 +28,7 @@ namespace PasswordManagerWPF.Classes
             this.setLanguage(lang);
         }
 
-        public async void saveLanguages(string lang)
+        public void saveLanguages(string lang)
         {
             if (string.IsNullOrEmpty(lang)) return;
             else
@@ -41,9 +41,8 @@ namespace PasswordManagerWPF.Classes
                     //save resolution in the json
                     config.language = lang;
                     using FileStream createStream = File.Create(filename);
-                    await JsonSerializer.SerializeAsync(createStream, config);
-                    await createStream.DisposeAsync();
-                    createStream.Close();
+                    JsonSerializer.Serialize(createStream, config);
+                    createStream.Dispose();
                 }
                 else throw new Exception("config.json is empty");
             }

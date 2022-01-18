@@ -13,7 +13,7 @@ namespace PasswordManagerWPF.Classes
     public class Resolution
     {
         public string filename = "config.json";
-        public async void saveRes(string resolution)
+        public void saveRes(string resolution)
         {
             if (string.IsNullOrEmpty(resolution)) return;
             else
@@ -26,9 +26,8 @@ namespace PasswordManagerWPF.Classes
                     //save resolution in the json
                     config.resolutionScreen = resolution;
                     using FileStream createStream = File.Create(filename);
-                    await JsonSerializer.SerializeAsync(createStream, config);
-                    await createStream.DisposeAsync();
-                    createStream.Close();
+                    JsonSerializer.Serialize(createStream, config);
+                    createStream.Dispose();
                 }
                 else throw new Exception("config.json is empty");
             }
@@ -50,7 +49,6 @@ namespace PasswordManagerWPF.Classes
             //set resolution
             mainWindow.Width = Convert.ToInt32(valueRes[0]);
             mainWindow.Height = Convert.ToInt32(valueRes[1]);
-
         }
     }
 }
