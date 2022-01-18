@@ -15,7 +15,7 @@ namespace PasswordManagerWPF.Classes
         public SQLiteConnection connectionDb;
         public dbClass()
         {
-            SQLiteConnection dbConn = new SQLiteConnection("Data Source=database.db; Version = 3");
+            SQLiteConnection dbConn = new SQLiteConnection("Data Source=database.db; Version = 3;");
             try
             {
                 dbConn.Open();
@@ -51,7 +51,6 @@ namespace PasswordManagerWPF.Classes
 
         public void loginUser(string username, string password)
         {
-            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             SQLiteDataReader sQLiteDataReader;
             string insertUser = "SELECT * FROM users WHERE username = $username AND password = $password";
@@ -72,7 +71,6 @@ namespace PasswordManagerWPF.Classes
 
         public List<passwordManager> loadSavedPassword()
         {
-            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string query = "SELECT * FROM pswManager";
             cmd.CommandText = query;
@@ -89,7 +87,6 @@ namespace PasswordManagerWPF.Classes
 
         public void insertPassword(string appName, string username, string password)
         {
-            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string insertUser = "INSERT INTO pswManager (sitename, password, username) VALUES ($sitename, $password, $username);";
             cmd.CommandText = insertUser;
