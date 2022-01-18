@@ -43,6 +43,7 @@ namespace PasswordManagerWPF.Classes
                     using FileStream createStream = File.Create(filename);
                     await JsonSerializer.SerializeAsync(createStream, config);
                     await createStream.DisposeAsync();
+                    createStream.Close();
                 }
                 else throw new Exception("config.json is empty");
             }
