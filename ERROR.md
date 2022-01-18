@@ -1,0 +1,3 @@
+- cambio impostazione faccio salva, poi ok, e di nuovo salva Errore che il file config.json é giá aperto [The process cannot access the config.json because it is being used by another process], non posso chiudere l'applicazione
+- cambiare lingua degli errori in fase di login
+- 

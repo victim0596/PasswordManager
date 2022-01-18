@@ -10,12 +10,12 @@ using System.Diagnostics;
 
 namespace PasswordManagerWPF.Classes
 {
-    internal class dbClass
+    public class dbClass
     {
         public SQLiteConnection connectionDb;
         public dbClass()
         {
-            SQLiteConnection dbConn = new SQLiteConnection("Data Source=database.db; Version = 3; New = True; Compress = True;");
+            SQLiteConnection dbConn = new SQLiteConnection("Data Source=database.db; Version = 3");
             try
             {
                 dbConn.Open();
@@ -28,7 +28,6 @@ namespace PasswordManagerWPF.Classes
         }
         public void createTable()
         {
-            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string queryUsers = "CREATE TABLE IF NOT EXISTS users (username VARCHAR(20) PRIMARY KEY NOT NULL, password VARCHAR(255) NOT NULL);";
             string queryPassword = "CREATE TABLE IF NOT EXISTS pswManager (id INTEGER PRIMARY KEY AUTOINCREMENT, sitename VARCHAR(35) NOT NULL, password VARCHAR(255) NOT NULL, username VARCHAR(35) NOT NULL);";
@@ -41,7 +40,6 @@ namespace PasswordManagerWPF.Classes
         public void registerUser(string username, string password)
         {
             if (this.checkIfExistUser()) throw new Exception("Only one account is permitted");
-            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string insertUser = "INSERT INTO users (username, password) VALUES ($username, $password);";
             cmd.CommandText = insertUser;
@@ -104,7 +102,6 @@ namespace PasswordManagerWPF.Classes
 
         public bool checkIfExistUser()
         {
-            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             SQLiteDataReader sQLiteDataReader;
             string checkUser = "SELECT * FROM users";
@@ -115,7 +112,6 @@ namespace PasswordManagerWPF.Classes
             {
                 dbUsername = sQLiteDataReader.GetString(0);
             }
-            this.connectionDb.Close();
             if (!string.IsNullOrEmpty(dbUsername)) return true;
             else return false;
         }
