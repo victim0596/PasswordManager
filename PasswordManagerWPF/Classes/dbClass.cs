@@ -28,6 +28,7 @@ namespace PasswordManagerWPF.Classes
         }
         public void createTable()
         {
+            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string queryUsers = "CREATE TABLE IF NOT EXISTS users (username VARCHAR(20) PRIMARY KEY NOT NULL, password VARCHAR(255) NOT NULL);";
             string queryPassword = "CREATE TABLE IF NOT EXISTS pswManager (id INTEGER PRIMARY KEY AUTOINCREMENT, sitename VARCHAR(35) NOT NULL, password VARCHAR(255) NOT NULL, username VARCHAR(35) NOT NULL);";
@@ -40,6 +41,7 @@ namespace PasswordManagerWPF.Classes
         public void registerUser(string username, string password)
         {
             if (this.checkIfExistUser()) throw new Exception("Only one account is permitted");
+            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string insertUser = "INSERT INTO users (username, password) VALUES ($username, $password);";
             cmd.CommandText = insertUser;
@@ -51,7 +53,7 @@ namespace PasswordManagerWPF.Classes
 
         public void loginUser(string username, string password)
         {
-
+            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             SQLiteDataReader sQLiteDataReader;
             string insertUser = "SELECT * FROM users WHERE username = $username AND password = $password";
@@ -72,6 +74,7 @@ namespace PasswordManagerWPF.Classes
 
         public List<passwordManager> loadSavedPassword()
         {
+            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string query = "SELECT * FROM pswManager";
             cmd.CommandText = query;
@@ -88,6 +91,7 @@ namespace PasswordManagerWPF.Classes
 
         public void insertPassword(string appName, string username, string password)
         {
+            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             string insertUser = "INSERT INTO pswManager (sitename, password, username) VALUES ($sitename, $password, $username);";
             cmd.CommandText = insertUser;
@@ -100,6 +104,7 @@ namespace PasswordManagerWPF.Classes
 
         public bool checkIfExistUser()
         {
+            this.connectionDb.Open();
             SQLiteCommand cmd = this.connectionDb.CreateCommand();
             SQLiteDataReader sQLiteDataReader;
             string checkUser = "SELECT * FROM users";
