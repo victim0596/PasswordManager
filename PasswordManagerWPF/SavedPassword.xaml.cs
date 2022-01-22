@@ -61,5 +61,12 @@ namespace PasswordManagerWPF
                 MessageBox.Show(ex.Message);
             }
         }
+        //Logout btn
+        private void Logout(object sender, RoutedEventArgs e)
+        {
+            globalVar.userLogged = false;
+            MessageBox.Show("Logged Out");
+            this.NavigationService.Navigate(new HomePage());
+        }
     }
 }
