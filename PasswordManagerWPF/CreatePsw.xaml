@@ -16,10 +16,14 @@
             </Button>
         </StackPanel>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,25">
                 <CheckBox Content="{Binding Path=(local:LangString.number)}" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isNumeric"></CheckBox>
                 <CheckBox Content="{Binding Path=(local:LangString.character)}" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isAlphabetic"></CheckBox>
                 <CheckBox Content="{Binding Path=(local:LangString.simbol)}" Foreground="White" FontFamily="Eras ITC" Margin="0,0,10,0" Name="isSimbol"></CheckBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="{Binding Path=(local:LangString.labelFilter)}" Foreground="White" Name="labelFilter" Margin="0,0,10,0"></Label>
+                <TextBox Background="White" Width="100" Height="18" Name="filterChar"></TextBox>
             </StackPanel>
             <StackPanel Margin="25" Orientation="Horizontal" HorizontalAlignment="Center">
                 <Label Name="labelLength" Content="{Binding Path=(local:LangString.length)}" Foreground="White" Margin="0,0,10,0" FontFamily="Eras ITC" FontWeight="Normal"></Label>
@@ -32,6 +36,11 @@
                 <Button Width="24" Height="24" HorizontalAlignment="Left" Margin="100,0,0,0" BorderBrush="Transparent" Style="{DynamicResource copyButton}" Click="btnCopyPsw">
                     <Button.Background>
                         <ImageBrush ImageSource="Assets/copy.png" Stretch="UniformToFill"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Width="24" Height="24" HorizontalAlignment="Left" Margin="5,0,0,0" BorderBrush="Transparent" Style="{DynamicResource saveButton}" Click="savePsw">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/diskette.png" Stretch="UniformToFill"></ImageBrush>
                     </Button.Background>
                 </Button>
             </StackPanel>

@@ -46,14 +46,33 @@ namespace PasswordManagerWPF
         {
             EntropyCalc entropyCalc = new EntropyCalc();
             GenPassword genPassword = new GenPassword();
-            //generate psw
-            string password = genPassword.generate(isNumeric.IsChecked ?? false, isAlphabetic.IsChecked ?? false, isSimbol.IsChecked ?? false, pswLength.Value);
-            generatedPsw.Content = password;
-            //calculate entropy
-            string entropyValue = entropyCalc.entropy(pswLength.Value);
-            entropyBit.Content = entropyValue;
-            entropyCalc.entropyTips(entropyValue, entropyMessage);
-            MessageBox.Show(LangString.pswGenMes);
+            try
+            {
+                //read excluded char
+                string excludedChar = filterChar.Text;
+                //check if there is duplicated in string
+                genPassword.checkDuplicateExcluded(excludedChar);
+                //check length of excludedChar is if > 5 throw error, maximum length is 5 for prevent stackOverflow
+                if (excludedChar.Length > 5) throw new Exception("Maximum number to char, that you can exclude is 5");
+                //generate psw
+                string password = genPassword.generate(isNumeric.IsChecked ?? false, isAlphabetic.IsChecked ?? false, isSimbol.IsChecked ?? false, pswLength.Value, excludedChar ?? "");
+                generatedPsw.Content = password;
+                //calculate entropy
+                string entropyValue = entropyCalc.entropy(pswLength.Value);
+                entropyBit.Content = entropyValue;
+                entropyCalc.entropyTips(entropyValue, entropyMessage);
+                MessageBox.Show(LangString.pswGenMes);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        //save Button
+        private void savePsw(object sender, RoutedEventArgs e)
+        {
+            SaveGenerated saveGenerated = new SaveGenerated();
+            saveGenerated.ShowDialog();
         }
     }
 }
