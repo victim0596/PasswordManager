@@ -8,7 +8,7 @@ namespace PasswordManagerWPF.Classes
 {
     internal class GenPassword
     {
-        public string generate(Boolean isNumeric, Boolean isAlphabetic, Boolean isSimbol, double length)
+        public string generate(Boolean isNumeric, Boolean isAlphabetic, Boolean isSimbol, double length, string excludedChar)
         {
             string genPsw = "";
             Random random = new Random();
@@ -81,6 +81,11 @@ namespace PasswordManagerWPF.Classes
                     }
                 }
             }
+            //check if genPsw had char in excludedChar string
+            if (this.containExcluded(genPsw, excludedChar))
+            {
+                genPsw = generate(isNumeric, isAlphabetic, isSimbol, length, excludedChar);
+            }
             return genPsw;
         }
         //generate random number
@@ -149,6 +154,32 @@ namespace PasswordManagerWPF.Classes
             generatedSimbol = c.ToString();
             globalVar.simbol++;
             return generatedSimbol;
+        }
+        public void checkDuplicateExcluded(string excludedChar)
+        {
+            char[] excludedArr = excludedChar.ToCharArray();
+            if (excludedArr.Length != excludedArr.Distinct().Count())
+            {
+                throw new Exception("There are repeated characters");
+            }
+        }
+
+        public bool containExcluded(string genPsw, string excludedChar)
+        {
+            bool checkContain = false;
+            char[] genPswArrChar = genPsw.ToCharArray();
+            char[] excludedCharArrChar = excludedChar.ToCharArray();
+            for (int i = 0; i < genPswArrChar.Length; i++)
+            {
+                for (int j = 0; j < excludedCharArrChar.Length; j++)
+                {
+                    if (genPswArrChar[i] == excludedCharArrChar[j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return checkContain;
         }
 
 
