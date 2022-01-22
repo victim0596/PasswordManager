@@ -26,6 +26,7 @@ namespace PasswordManagerWPF
             InitializeComponent();
             resolution.Text = globalVar.resolution;
             language.Text = globalVar.language;
+            sizeFont.Text = globalVar.sizeFont;
         }
 
         public void colorPaletteBackground(object sender, RoutedEventArgs e)
@@ -42,10 +43,12 @@ namespace PasswordManagerWPF
         {
             Resolution res = new Resolution();
             Languages lang = new Languages();
+            fontSize fontSize = new fontSize();
             try
             {
                 res.saveRes(resolution.Text);
                 lang.saveLanguages(language.Text);
+                fontSize.saveFontSize(sizeFont.Text);
                 MessageBox.Show(LangString.savedConfig);
             }
             catch (Exception ex)

@@ -20,6 +20,7 @@ namespace PasswordManagerWPF.Language
             LangString.bgColor = "Background color";
             LangString.fontColor = "Font Color";
             LangString.savedConfig = "Configuration Saved, reload app for see the changes";
+            LangString.fontSize = "Font size";
             //btn
             LangString.saveBtn = "Save";
             //create psw

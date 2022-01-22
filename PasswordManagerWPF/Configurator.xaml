@@ -15,7 +15,7 @@
                 <Label Content="{Binding Path=(local:LangString.resolution)}" Foreground="White" FontFamily="Eras ITC" FontSize="12"></Label>
                 <ComboBox Width="85" Height="20" x:Name="resolution">
                     <ComboBoxItem Content="800x600"/>
-                    <ComboBoxItem Content="1280x768"/>
+                    <ComboBoxItem Content="1280x720"/>
                     <ComboBoxItem Content="1920x1080"/>
                 </ComboBox>
             </StackPanel>
@@ -41,6 +41,15 @@
                         <ImageBrush ImageSource="Assets/color-circle.png" Stretch="UniformToFill" ></ImageBrush>
                     </Button.Background>
                 </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="{Binding Path=(local:LangString.fontSize)}" Foreground="White" FontFamily="Eras ITC" FontSize="12"></Label>
+                <ComboBox Width="85" Height="20" x:Name="sizeFont">
+                    <ComboBoxItem Content="x1"/>
+                    <ComboBoxItem Content="x1,2"/>
+                    <ComboBoxItem Content="x1,4"/>
+                    <ComboBoxItem Content="x1,6"/>
+                </ComboBox>
             </StackPanel>
         </StackPanel>
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">

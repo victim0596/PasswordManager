@@ -27,6 +27,8 @@ namespace PasswordManagerWPF
             InitializeComponent();
             ColorChanger colorChanger = new ColorChanger();
             colorChanger.applyFontGenPsw(this);
+            fontSize fontSize = new fontSize();
+            fontSize.applyFontSizeGenPsw(this);
         }
         //back Button
         private void Button_Click_3(object sender, RoutedEventArgs e)

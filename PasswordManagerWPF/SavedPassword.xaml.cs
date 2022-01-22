@@ -31,6 +31,8 @@ namespace PasswordManagerWPF
                 savedPswDB.ItemsSource = db.loadSavedPassword();
                 ColorChanger colorChanger = new ColorChanger();
                 colorChanger.applyFontSavPsw(this);
+                fontSize fontSize = new fontSize();
+                fontSize.applyFontSizeSavPsw(this);
             }
             catch (Exception ex)
             {

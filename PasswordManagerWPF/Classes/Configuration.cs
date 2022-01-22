@@ -13,6 +13,8 @@ namespace PasswordManagerWPF.Classes
         public string backgroundColor { get; set; }
         public string fontColor { get; set; }
 
+        public string fontSize { get; set; }
+
         public void loadConfig(MainWindow mainWindow)
         {
             //load resolution
@@ -27,6 +29,10 @@ namespace PasswordManagerWPF.Classes
             ColorChanger colorChanger = new ColorChanger();
             colorChanger.loadColorBG(mainWindow);
             colorChanger.loadColorFG();
+
+            //load fontSize
+            fontSize fontSize = new fontSize();
+            fontSize.loadFontSize();
         }
     }
 }

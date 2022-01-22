@@ -17,6 +17,8 @@ namespace PasswordManagerWPF.GVariable
         public static String bgColor { get; set; }
         public static String fontColor { get; set; }
         public static String savedConfig { get; set; }
+        public static String fontSize { get; set; }
+
         //button
         public static String saveBtn { get; set; }
         //create psw

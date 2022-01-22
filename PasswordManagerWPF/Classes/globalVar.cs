@@ -21,5 +21,6 @@ namespace PasswordManagerWPF.Classes
         public static string language;
         public static string colorBG;
         public static string colorFG;
+        public static string sizeFont;
     }
 }
