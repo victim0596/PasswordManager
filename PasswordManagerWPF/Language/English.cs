@@ -34,6 +34,7 @@ namespace PasswordManagerWPF.Language
             LangString.genPswBtn = "Generate";
             LangString.pswCopied = "Password copied";
             LangString.pswGenMes = "Password generated";
+            LangString.labelFilter = "Exclude char";
             //entropy tips
             LangString.tip1 = "Very weak password, generate one more with more option or change length";
             LangString.tip2 = "Weak password, generate one more with more option or change length";

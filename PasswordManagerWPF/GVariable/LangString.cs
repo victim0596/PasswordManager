@@ -31,8 +31,8 @@ namespace PasswordManagerWPF.GVariable
         public static String entropyMessage { get; set; }
         public static String genPswBtn { get; set; }
         public static String pswCopied { get; set; }
-
         public static String pswGenMes { get; set; }
+        public static String labelFilter { get; set; }
 
         //entropy tips
         public static String tip1 { get; set; }
