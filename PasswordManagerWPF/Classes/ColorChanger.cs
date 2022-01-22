@@ -96,6 +96,7 @@ namespace PasswordManagerWPF.Classes
             createPsw.generatedPsw.Foreground = colorFont;
             createPsw.labelEntropy.Foreground = colorFont;
             createPsw.entropyBit.Foreground = colorFont;
+            createPsw.labelFilter.Foreground = colorFont;
         }
 
         public void applyFontSavPsw(SavedPassword savedPassword)

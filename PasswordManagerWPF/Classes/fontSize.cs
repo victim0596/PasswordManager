@@ -61,6 +61,7 @@ namespace PasswordManagerWPF.Classes
             createPsw.labelEntropy.FontSize = Convert.ToInt32(createPsw.labelEntropy.FontSize * sizeValue);
             createPsw.entropyBit.FontSize = Convert.ToInt32(createPsw.entropyBit.FontSize * sizeValue);
             createPsw.entropyMessage.FontSize = Convert.ToInt32(createPsw.entropyMessage.FontSize * sizeValue);
+            createPsw.labelFilter.FontSize = Convert.ToInt32(createPsw.labelFilter.FontSize * sizeValue);
         }
 
         public void applyFontSizeSavPsw(SavedPassword savedPassword)
