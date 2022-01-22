@@ -15,4 +15,3 @@ In this file, i write all idea for update the app
 - Entropy value in saved password had different color based on entropy value
 - Add entropy value color legend in saved password (with an icon popup)
 - Add the possibility to edit a password, username, appname
-- Add font size multiplicator in configurator (x1.2 x1.4 x1.6)
