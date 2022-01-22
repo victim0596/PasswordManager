@@ -12,9 +12,8 @@
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <colorpicker:StandardColorPicker x:Name="main" Background="White"/>
-            <colorpicker:PortableColorPicker ColorState="{Binding ElementName=main, Path=ColorState, Mode=TwoWay}"/>
-            <Button HorizontalAlignment="Right" Content="Apply" FontSize="15" FontFamily="Eras ITC" Padding="7" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}"></Button>
+            <colorpicker:StandardColorPicker x:Name="changeBG" Background="White" Height="204" Width="198"/>
+            <Button Click="ChangeColor" Margin="0,20,0,0" HorizontalAlignment="Right" Content="Apply" FontSize="15" FontFamily="Eras ITC" Padding="7" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}"></Button>
         </StackPanel>
     </Grid>
 </Window>

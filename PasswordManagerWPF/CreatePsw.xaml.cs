@@ -25,6 +25,8 @@ namespace PasswordManagerWPF
         public CreatePsw()
         {
             InitializeComponent();
+            ColorChanger colorChanger = new ColorChanger();
+            colorChanger.applyFontGenPsw(this);
         }
         //back Button
         private void Button_Click_3(object sender, RoutedEventArgs e)

@@ -1,4 +1,6 @@
 {
   "resolutionScreen": "800x600",
-  "language": "English"
+  "language": "English",
+  "backgroundColor": "0-0-0-255",
+  "fontColor": "255-255-255-255"
 }

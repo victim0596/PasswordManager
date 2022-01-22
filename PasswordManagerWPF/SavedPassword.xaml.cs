@@ -29,6 +29,8 @@ namespace PasswordManagerWPF
             {
                 dbClass db = new dbClass();
                 savedPswDB.ItemsSource = db.loadSavedPassword();
+                ColorChanger colorChanger = new ColorChanger();
+                colorChanger.applyFontSavPsw(this);
             }
             catch (Exception ex)
             {

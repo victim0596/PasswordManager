@@ -35,7 +35,8 @@ namespace PasswordManagerWPF
         }
         public void colorPaletteFont(object sender, RoutedEventArgs e)
         {
-
+            ChangeColorFont changeFont = new ChangeColorFont();
+            changeFont.ShowDialog();
         }
         public void saveBtn(object sender, RoutedEventArgs e)
         {

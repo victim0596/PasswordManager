@@ -10,8 +10,8 @@ namespace PasswordManagerWPF.Classes
     {
         public string resolutionScreen { get; set; }
         public string language { get; set; }
-        public string[] backgroundColor { get; set; }
-        public string[] fontColor { get; set; }
+        public string backgroundColor { get; set; }
+        public string fontColor { get; set; }
 
         public void loadConfig(MainWindow mainWindow)
         {
@@ -22,6 +22,11 @@ namespace PasswordManagerWPF.Classes
             //load Language
             Languages lang = new Languages();
             lang.loadLanguages();
+
+            //load Color
+            ColorChanger colorChanger = new ColorChanger();
+            colorChanger.loadColorBG(mainWindow);
+            colorChanger.loadColorFG();
         }
     }
 }

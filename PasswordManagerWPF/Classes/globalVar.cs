@@ -19,5 +19,7 @@ namespace PasswordManagerWPF.Classes
         //for configurator
         public static string resolution;
         public static string language;
+        public static string colorBG;
+        public static string colorFG;
     }
 }
