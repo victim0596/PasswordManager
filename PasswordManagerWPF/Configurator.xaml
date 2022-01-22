@@ -13,10 +13,10 @@
         <StackPanel Orientation="Vertical" Margin="10" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <Label Content="{Binding Path=(local:LangString.resolution)}" Foreground="White" FontFamily="Eras ITC" FontSize="12"></Label>
-                <ComboBox Width="85" Height="20" Name="resolution">
-                    <ComboBoxItem>800x600</ComboBoxItem>
-                    <ComboBoxItem>1280x768</ComboBoxItem>
-                    <ComboBoxItem>1920x1080</ComboBoxItem>
+                <ComboBox Width="85" Height="20" x:Name="resolution">
+                    <ComboBoxItem Content="800x600"/>
+                    <ComboBoxItem Content="1280x768"/>
+                    <ComboBoxItem Content="1920x1080"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
