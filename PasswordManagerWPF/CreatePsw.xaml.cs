@@ -60,6 +60,9 @@ namespace PasswordManagerWPF
                 string entropyValue = entropyCalc.entropy(pswLength.Value);
                 entropyBit.Content = entropyValue;
                 entropyCalc.entropyTips(entropyValue, entropyMessage);
+                //set variable for savePsw
+                globalVar.genPsw = password;
+
                 MessageBox.Show(LangString.pswGenMes);
             }
             catch (Exception ex)

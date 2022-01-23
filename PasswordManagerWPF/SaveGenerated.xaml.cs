@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.GVariable;
 
 namespace PasswordManagerWPF
 {
@@ -22,6 +24,23 @@ namespace PasswordManagerWPF
         public SaveGenerated()
         {
             InitializeComponent();
+        }
+        //add Button
+        private void insertPassword(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!globalVar.userLogged) throw new Exception("To add the password you must be logged in");
+                LoginForm loginForm = new LoginForm();
+                loginForm.isValidPsw(appNameText.Text, passwordText.Text, usernameText.Text);
+                dbClass db = new dbClass();
+                db.insertPassword(appNameText.Text, usernameText.Text, passwordText.Text);
+                MessageBox.Show(LangString.pswAdded);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

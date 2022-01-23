@@ -22,5 +22,7 @@ namespace PasswordManagerWPF.Classes
         public static string colorBG;
         public static string colorFG;
         public static string sizeFont;
+        //for saved password 
+        public static string genPsw { get; set; }
     }
 }
