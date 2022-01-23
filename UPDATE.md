@@ -4,7 +4,6 @@ In this file, i write all idea for update the app
 
 - Change UI of the application
 - Add the possibility to copy the password saved in the saved password page
-- Add in the create password page, the possibility to directly save the generated password in the app database (check if user is logged)
 - Add the possibility to remove a saved password, the remove button had the choose to accept or not to remove password, or with canc keys
 - Add entropy calculator for own password, add new section
 - Add search in saved password based on appname
