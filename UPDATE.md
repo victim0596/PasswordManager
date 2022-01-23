@@ -12,4 +12,3 @@ In this file, i write all idea for update the app
 - Entropy value in saved password had different color based on entropy value
 - Add entropy value color legend in saved password (with an icon popup)
 - Add the possibility to edit a password, username, appname
-- Prevent stackOverflow error when exclude more char in genPsw
