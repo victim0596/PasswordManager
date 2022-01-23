@@ -50,12 +50,11 @@ namespace PasswordManagerWPF
             {
                 //read excluded char
                 string excludedChar = filterChar.Text;
+                genPassword.excludedChar = excludedChar;
                 //check if there is duplicated in string
                 genPassword.checkDuplicateExcluded(excludedChar);
-                //check length of excludedChar is if > 5 throw error, maximum length is 5 for prevent stackOverflow
-                if (excludedChar.Length > 5) throw new Exception("Maximum number to char, that you can exclude is 5");
                 //generate psw
-                string password = genPassword.generate(isNumeric.IsChecked ?? false, isAlphabetic.IsChecked ?? false, isSimbol.IsChecked ?? false, pswLength.Value, excludedChar ?? "");
+                string password = genPassword.generate(isNumeric.IsChecked ?? false, isAlphabetic.IsChecked ?? false, isSimbol.IsChecked ?? false, pswLength.Value);
                 generatedPsw.Content = password;
                 //calculate entropy
                 string entropyValue = entropyCalc.entropy(pswLength.Value);
