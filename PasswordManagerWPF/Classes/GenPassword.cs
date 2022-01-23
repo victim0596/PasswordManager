@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PasswordManagerWPF.Classes
 {
     internal class GenPassword
     {
-        public string generate(Boolean isNumeric, Boolean isAlphabetic, Boolean isSimbol, double length, string excludedChar)
+        public string excludedChar = "";
+        public string generate(Boolean isNumeric, Boolean isAlphabetic, Boolean isSimbol, double length)
         {
             string genPsw = "";
             Random random = new Random();
@@ -81,11 +83,6 @@ namespace PasswordManagerWPF.Classes
                     }
                 }
             }
-            //check if genPsw had char in excludedChar string
-            if (this.containExcluded(genPsw, excludedChar))
-            {
-                genPsw = generate(isNumeric, isAlphabetic, isSimbol, length, excludedChar);
-            }
             return genPsw;
         }
         //generate random number
@@ -93,7 +90,13 @@ namespace PasswordManagerWPF.Classes
         {
             Random random = new Random();
             globalVar.digits++;
-            return random.Next(0, 10);
+            int geneneratedNumber = random.Next(0, 10);
+            //check if the generated value is inside the excludeChar string
+            while (checkContainExcluded(geneneratedNumber.ToString()))
+            {
+                geneneratedNumber = random.Next(0, 10);
+            }
+            return geneneratedNumber;
         }
         //generate random letter uppercase/lowercase
         public string genChar()
@@ -106,12 +109,22 @@ namespace PasswordManagerWPF.Classes
             {
                 //for uppercase
                 c = Convert.ToChar(rand.Next(65, 91));
+                //check if the generated value is inside the excludeChar string
+                while (checkContainExcluded(c.ToString()))
+                {
+                    c = Convert.ToChar(rand.Next(65, 91));
+                }
                 globalVar.upperCase++;
             }
             else
             {
                 //for lowercase
                 c = Convert.ToChar(rand.Next(97, 123));
+                //check if the generated value is inside the excludeChar string
+                while (checkContainExcluded(c.ToString()))
+                {
+                    c = Convert.ToChar(rand.Next(97, 123));
+                }
                 globalVar.lowerCase++;
             }
             generatedChar = c.ToString();
@@ -129,21 +142,41 @@ namespace PasswordManagerWPF.Classes
                 case 1:
                     {
                         c = Convert.ToChar(rand.Next(33, 48));
+                        //check if the generated value is inside the excludeChar string
+                        while (checkContainExcluded(c.ToString()))
+                        {
+                            c = Convert.ToChar(rand.Next(33, 48));
+                        }
                         break;
                     }
                 case 2:
                     {
                         c = Convert.ToChar(rand.Next(58, 65));
+                        //check if the generated value is inside the excludeChar string
+                        while (checkContainExcluded(c.ToString()))
+                        {
+                            c = Convert.ToChar(rand.Next(58, 65));
+                        }
                         break;
                     }
                 case 3:
                     {
                         c = Convert.ToChar(rand.Next(91, 97));
+                        //check if the generated value is inside the excludeChar string
+                        while (checkContainExcluded(c.ToString()))
+                        {
+                            c = Convert.ToChar(rand.Next(91, 97));
+                        }
                         break;
                     }
                 case 4:
                     {
                         c = Convert.ToChar(rand.Next(123, 127));
+                        //check if the generated value is inside the excludeChar string
+                        while (checkContainExcluded(c.ToString()))
+                        {
+                            c = Convert.ToChar(rand.Next(123, 127));
+                        }
                         break;
                     }
                 default:
@@ -164,24 +197,45 @@ namespace PasswordManagerWPF.Classes
             }
         }
 
-        public bool containExcluded(string genPsw, string excludedChar)
+        public bool checkContainExcluded(string generatedValue)
         {
-            bool checkContain = false;
-            char[] genPswArrChar = genPsw.ToCharArray();
-            char[] excludedCharArrChar = excludedChar.ToCharArray();
-            for (int i = 0; i < genPswArrChar.Length; i++)
+            if (string.IsNullOrEmpty(this.excludedChar)) return false;
+            if (countCharExcluded()) throw new Exception("You can't exclude all char");
+            char[] excludedArr = this.excludedChar.ToCharArray();
+            for (int i = 0; i < excludedArr.Length; i++)
             {
-                for (int j = 0; j < excludedCharArrChar.Length; j++)
+                if (excludedArr[i].ToString() == generatedValue)
                 {
-                    if (genPswArrChar[i] == excludedCharArrChar[j])
-                    {
-                        return true;
-                    }
+                    return true;
                 }
             }
-            return checkContain;
+            return false;
         }
 
+        public bool countCharExcluded()
+        {
+            if (string.IsNullOrEmpty(this.excludedChar)) return false;
+            char[] excludedArr = this.excludedChar.ToCharArray();
+            int number = 0;
+            int upperCase = 0;
+            int lowerCase = 0;
+            int simbol = 0;
+            string patternNumber = @"[0-9]";
+            string patterUpperCase = @"[A-Z]";
+            string patterLowerCase = @"[a-z]";
+            Regex rgNumber = new Regex(patternNumber);
+            Regex rgLowerCase = new Regex(patterLowerCase);
+            Regex rgUppercase = new Regex(patterUpperCase);
+            for (int i = 0; i < excludedArr.Length; i++)
+            {
+                if (rgNumber.IsMatch(excludedArr[i].ToString())) number++;
+                if (rgLowerCase.IsMatch(excludedArr[i].ToString())) lowerCase++;
+                if (rgUppercase.IsMatch(excludedArr[i].ToString())) upperCase++;
+                else simbol++;
+            }
+            if (number == 10 || simbol == 32 || lowerCase == 26 || upperCase == 26) return true;
+            return false;
+        }
 
     }
 }
