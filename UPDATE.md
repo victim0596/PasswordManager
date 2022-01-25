@@ -11,3 +11,6 @@ In this file, i write all idea for update the app
 - Entropy value in saved password had different color based on entropy value
 - Add entropy value color legend in saved password (with an icon popup)
 - Add the possibility to edit a password, username, appname
+- Add enter in saved password for access
+- Add control for duplicate in create password, in save option and in add in saved password page
+
