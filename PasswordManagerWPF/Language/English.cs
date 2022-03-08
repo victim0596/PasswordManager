@@ -48,6 +48,9 @@ namespace PasswordManagerWPF.Language
             LangString.pswAdded = "Password added!";
             LangString.appName = "App name";
             LangString.addBtn = "ADD";
+            //edit detail
+            LangString.updateBtnDetail = "ADD";
+            LangString.messageUpdateDetail = "Detail updated!";
         }
     }
 }

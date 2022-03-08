@@ -47,6 +47,9 @@ namespace PasswordManagerWPF.GVariable
         public static String pswAdded { get; set; }
         public static String appName { get; set; }
         public static String addBtn { get; set; }
+        //edit detail
+        public static String updateBtnDetail { get; set; }
+        public static String messageUpdateDetail { get; set; }
 
 
 
