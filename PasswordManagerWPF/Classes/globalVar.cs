@@ -24,5 +24,12 @@ namespace PasswordManagerWPF.Classes
         public static string sizeFont;
         //for saved password 
         public static string genPsw { get; set; }
+        //saved psw
+        public static List<passwordManager> listPsw { get; set; }
+        //edit detail
+        public static string appNameDetail { get; set; }
+        public static string usernameDetail { get; set; }
+        public static string passwordDetail { get; set; }
+        public static int idRowDetail { get; set; }
     }
 }

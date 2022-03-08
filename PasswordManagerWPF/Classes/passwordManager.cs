@@ -8,6 +8,7 @@ namespace PasswordManagerWPF.Classes
 {
     public class passwordManager
     {
+        public int id { get; set; }
         public string appName { get; set; }
         public string username { get; set; }
         public string password { get; set; }

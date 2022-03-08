@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows;
 using System.Diagnostics;
-
+using System.Net;
 
 namespace PasswordManagerWPF.Classes
 {
@@ -79,7 +79,7 @@ namespace PasswordManagerWPF.Classes
             List<passwordManager> passwordManagers = new List<passwordManager>();
             while (sQLiteDataReader.Read())
             {
-                passwordManagers.Add(new passwordManager() { appName = sQLiteDataReader.GetString(1), password = sQLiteDataReader.GetString(2), username = sQLiteDataReader.GetString(3) });
+                passwordManagers.Add(new passwordManager() { id = sQLiteDataReader.GetInt32(0), appName = sQLiteDataReader.GetString(1), password = sQLiteDataReader.GetString(2), username = sQLiteDataReader.GetString(3) });
             }
             this.connectionDb.Close();
             return passwordManagers;
@@ -111,6 +111,19 @@ namespace PasswordManagerWPF.Classes
             }
             if (!string.IsNullOrEmpty(dbUsername)) return true;
             else return false;
+        }
+
+        public void updateDetail(string appName, string username, string password, int id)
+        {
+            SQLiteCommand cmd = this.connectionDb.CreateCommand();
+            string updateDetailInfo = "UPDATE pswManager SET sitename = $sitename, password = $password, username = $username WHERE id = $idDetail";
+            cmd.CommandText = updateDetailInfo;
+            cmd.Parameters.AddWithValue("$username", username);
+            cmd.Parameters.AddWithValue("$password", password);
+            cmd.Parameters.AddWithValue("$sitename", appName);
+            cmd.Parameters.AddWithValue("$idDetail", id);
+            cmd.ExecuteNonQuery();
+            this.connectionDb.Close();
         }
     }
 }
