@@ -131,5 +131,11 @@ namespace PasswordManagerWPF
             editDetail.ShowDialog();
         }
 
+        private void findFunc(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = globalVar.listPsw;
+            else savedPswDB.ItemsSource = globalVar.listPsw.Where(x => x.appName == searchText.Text).ToList();
+        }
+
     }
 }
