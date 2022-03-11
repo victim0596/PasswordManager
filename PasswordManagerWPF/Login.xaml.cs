@@ -13,7 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.Components.Commands;
 using PasswordManagerWPF.GVariable;
+using PasswordManagerWPF.Components.Queries;
 
 
 namespace PasswordManagerWPF
@@ -42,8 +44,9 @@ namespace PasswordManagerWPF
             {
                 try
                 {
-                    dbClass db = new dbClass();
-                    db.loginUser(username.Text, password.Password.ToString());
+                    var user = new GetUserByUsernamePswQueryHandler().Retrieve(new GetUserByUsernamePswQuery { Username = username.Text, Password = password.Password.ToString() }).FirstOrDefault();
+                    if (user == null) throw new Exception("No user with this username");
+                    else globalVar.userLogged = true;
                     this.NavigationService.Navigate(new SavedPassword());
                 }
                 catch (Exception ex)
@@ -61,13 +64,12 @@ namespace PasswordManagerWPF
             {
                 try
                 {
-                    dbClass db = new dbClass();
-                    db.registerUser(username.Text, password.Password.ToString());
+                    new RegisterUserCommandHandler().Execute(new RegisterUserCommand { Username = username.Text, Password = password.Password.ToString() });
                     MessageBox.Show(LangString.userCreated);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(" Possible duplicate entry, you already have an account - " + ex.Message);
                 }
             }
         }

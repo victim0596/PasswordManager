@@ -17,7 +17,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.Components.Commands;
+using PasswordManagerWPF.DBModels;
 using PasswordManagerWPF.GVariable;
+using PasswordManagerWPF.Components.Queries;
 
 namespace PasswordManagerWPF
 {
@@ -31,8 +34,7 @@ namespace PasswordManagerWPF
             InitializeComponent();
             try
             {
-                dbClass db = new dbClass();
-                globalVar.listPsw = db.loadSavedPassword();
+                globalVar.listPsw = new GetAllSavedPswQueryHandler().Retrieve();
                 savedPswDB.ItemsSource = globalVar.listPsw;
                 ColorChanger colorChanger = new ColorChanger();
                 colorChanger.applyFontSavPsw(this);
@@ -56,8 +58,7 @@ namespace PasswordManagerWPF
             {
                 LoginForm loginForm = new LoginForm();
                 loginForm.isValidPsw(appNameText.Text, passwordText.Password.ToString(), usernameText.Text);
-                dbClass db = new dbClass();
-                db.insertPassword(appNameText.Text, usernameText.Text, passwordText.Password.ToString());
+                new InsertPasswordCommandHandler().Execute(new InsertPasswordCommand { Appname = appNameText.Text, Username = usernameText.Text, Password = passwordText.Password.ToString() });
                 MessageBox.Show(LangString.pswAdded);
                 this.NavigationService.Navigate(new SavedPassword());
             }
@@ -76,7 +77,7 @@ namespace PasswordManagerWPF
         //copy function
         private void CopyPsw(int index)
         {
-            Clipboard.SetText(globalVar.listPsw[index].password);
+            Clipboard.SetText(globalVar.listPsw[index].Password);
             MessageBox.Show(LangString.pswCopied);
         }
 
@@ -87,7 +88,7 @@ namespace PasswordManagerWPF
             var cellInfo = savedPswDB.SelectedCells[column - 1];
             var content = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text;
 
-            if (content == string.Empty) (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text = globalVar.listPsw[rows].password;
+            if (content == string.Empty) (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text = globalVar.listPsw[rows].Password;
             else (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text = string.Empty;
         }
 
@@ -125,9 +126,9 @@ namespace PasswordManagerWPF
             var contentUsername = (cellInfoUsername.Column.GetCellContent(cellInfoUsername.Item) as TextBlock).Text;
 
             globalVar.appNameDetail = contentAppName;
-            globalVar.passwordDetail = globalVar.listPsw[selectedIndex].password;
+            globalVar.passwordDetail = globalVar.listPsw[selectedIndex].Password;
             globalVar.usernameDetail = contentUsername;
-            globalVar.idRowDetail = globalVar.listPsw[selectedIndex].id;
+            globalVar.idRowDetail = globalVar.listPsw[selectedIndex].Id;
             EditDetail editDetail = new EditDetail();
             editDetail.ShowDialog();
         }
@@ -137,7 +138,7 @@ namespace PasswordManagerWPF
             if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = globalVar.listPsw;
             else
             {
-                savedPswDB.ItemsSource = globalVar.listPsw.Where(x => Regex.Match(x.appName, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
+                savedPswDB.ItemsSource = globalVar.listPsw.Where(x => Regex.Match(x.Appname, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
             }
         }
 

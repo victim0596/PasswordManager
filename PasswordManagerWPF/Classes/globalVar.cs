@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordManagerWPF.Components.Queries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace PasswordManagerWPF.Classes
         //for saved password 
         public static string genPsw { get; set; }
         //saved psw
-        public static List<passwordManager> listPsw { get; set; }
+        public static List<GetAllSavedPswQueryResult> listPsw { get; set; }
         //edit detail
         public static string appNameDetail { get; set; }
         public static string usernameDetail { get; set; }

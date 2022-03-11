@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
+using PasswordManagerWPF.Components.Commands;
 using PasswordManagerWPF.GVariable;
 
 namespace PasswordManagerWPF
@@ -30,11 +31,7 @@ namespace PasswordManagerWPF
         {
             try
             {
-                string username = usernameText.Text;
-                string password = passwordText.Text;
-                string appname = appNameText.Text;
-                dbClass dbClass = new dbClass();
-                dbClass.updateDetail(appname, username, password, globalVar.idRowDetail);
+                new UpdateDetailCommandHandler().Execute(new UpdateDetailCommand { Appname = appNameText.Text, Username = usernameText.Text, Password = passwordText.Text, Id = globalVar.idRowDetail });
                 MessageBox.Show(LangString.messageUpdateDetail);
                 this.Close();
             }
