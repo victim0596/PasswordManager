@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -134,7 +135,10 @@ namespace PasswordManagerWPF
         private void findFunc(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = globalVar.listPsw;
-            else savedPswDB.ItemsSource = globalVar.listPsw.Where(x => x.appName == searchText.Text).ToList();
+            else
+            {
+                savedPswDB.ItemsSource = globalVar.listPsw.Where(x => Regex.Match(x.appName, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
+            }
         }
 
     }
