@@ -56,6 +56,15 @@ namespace PasswordManagerWPF
             }
 
         }
+        //keyup with enter in login button
+        private void loginBtnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+            {
+                this.loginBtn(sender, e);
+            }
+        }
+
         //register btn
         private void registerBtn(object sender, RoutedEventArgs e)
         {

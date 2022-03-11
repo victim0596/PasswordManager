@@ -8,7 +8,7 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="Login">
 
-    <Grid>
+    <Grid KeyUp="loginBtnKeyUp">
         <StackPanel>
             <Button Width="32" Height="32" HorizontalAlignment="Left" Margin="20" BorderBrush="Transparent" Style="{DynamicResource BackButton}" Click="Button_Click_3">
                 <Button.Background>
