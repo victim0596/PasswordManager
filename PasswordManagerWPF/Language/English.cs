@@ -49,6 +49,7 @@ namespace PasswordManagerWPF.Language
             LangString.appName = "App name";
             LangString.addBtn = "ADD";
             LangString.findLabel = "Find by app name";
+            LangString.messageDelete = "Are you sure to delete this account?";
             //edit detail
             LangString.updateBtnDetail = "ADD";
             LangString.messageUpdateDetail = "Detail updated!";

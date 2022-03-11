@@ -49,6 +49,7 @@ namespace PasswordManagerWPF.Language
             LangString.appName = "Nome app";
             LangString.addBtn = "AGGIUNGI";
             LangString.findLabel = "Trova per nome app";
+            LangString.messageDelete = "Sei sicuro di voler cancellare questo account?";
             //edit detail
             LangString.updateBtnDetail = "AGGIUNGI";
             LangString.messageUpdateDetail = "Dettagli aggiornati!";

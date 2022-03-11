@@ -113,6 +113,11 @@ namespace PasswordManagerWPF
                         CopyPsw(selectedIndex);
                         break;
                     }
+                case 6:
+                    {
+                        DeleteRow(selectedIndex);
+                        break;
+                    }
             }
         }
 
@@ -139,6 +144,16 @@ namespace PasswordManagerWPF
             else
             {
                 savedPswDB.ItemsSource = globalVar.listPsw.Where(x => Regex.Match(x.Appname, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
+            }
+        }
+
+        private void DeleteRow(int selectedIndex)
+        {
+            MessageBoxResult result = MessageBox.Show(LangString.messageDelete, "", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                new DeleteDetailCommandHandler().Execute(new DeleteDetailCommand { Id = globalVar.listPsw[selectedIndex].Id });
+                this.NavigationService.Navigate(new SavedPassword());
             }
         }
 
