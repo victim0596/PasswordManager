@@ -21,6 +21,7 @@ using PasswordManagerWPF.Components.Commands;
 using PasswordManagerWPF.DBModels;
 using PasswordManagerWPF.GVariable;
 using PasswordManagerWPF.Components.Queries;
+using PasswordManagerWPF.Domain;
 
 namespace PasswordManagerWPF
 {
@@ -35,17 +36,32 @@ namespace PasswordManagerWPF
             try
             {
                 globalVar.listPsw = new GetAllSavedPswQueryHandler().Retrieve();
-                savedPswDB.ItemsSource = globalVar.listPsw;
+                //savedPswDB.ItemsSource = globalVar.listPsw;
                 ColorChanger colorChanger = new ColorChanger();
                 colorChanger.applyFontSavPsw(this);
                 fontSize fontSize = new fontSize();
                 fontSize.applyFontSizeSavPsw(this);
+                savedPswDB.ItemsSource = CalculateEntropyEveryPsw(globalVar.listPsw);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+
+        private List<AccountDetailWithEntropy> CalculateEntropyEveryPsw(List<GetAllSavedPswQueryResult> listPsw)
+        {
+            List<AccountDetailWithEntropy> result = new List<AccountDetailWithEntropy>();
+            foreach (var item in listPsw)
+            {
+                string entropyValue = new EntropyCalc().entropyByPassword(item.Password);
+                result.Add(new AccountDetailWithEntropy { Username = item.Username, Appname = item.Appname, Entropy = entropyValue });
+            }
+            return result;
+        }
+
         //back Button
         private void backBtn(object sender, RoutedEventArgs e)
         {
@@ -85,7 +101,7 @@ namespace PasswordManagerWPF
         private void showPsw(int rows, int column)
         {
 
-            var cellInfo = savedPswDB.SelectedCells[column - 1];
+            var cellInfo = savedPswDB.SelectedCells[column - 2];
             var content = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text;
 
             if (content == string.Empty) (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text = globalVar.listPsw[rows].Password;
@@ -98,22 +114,22 @@ namespace PasswordManagerWPF
             int selectedColum = savedPswDB.CurrentColumn.DisplayIndex;
             switch (selectedColum)
             {
-                case 3:
+                case 4:
                     {
                         showPsw(selectedIndex, selectedColum);
                         break;
                     }
-                case 4:
+                case 5:
                     {
                         EditRow(selectedIndex);
                         break;
                     }
-                case 5:
+                case 6:
                     {
                         CopyPsw(selectedIndex);
                         break;
                     }
-                case 6:
+                case 7:
                     {
                         DeleteRow(selectedIndex);
                         break;

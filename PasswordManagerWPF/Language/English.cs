@@ -50,6 +50,7 @@ namespace PasswordManagerWPF.Language
             LangString.addBtn = "ADD";
             LangString.findLabel = "Find by app name";
             LangString.messageDelete = "Are you sure to delete this account?";
+            LangString.entropyText = "Entropy";
             //edit detail
             LangString.updateBtnDetail = "ADD";
             LangString.messageUpdateDetail = "Detail updated!";

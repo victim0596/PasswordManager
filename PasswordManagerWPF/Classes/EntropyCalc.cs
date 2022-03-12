@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -27,6 +28,28 @@ namespace PasswordManagerWPF.Classes
             if (globalVar.digits > 0) poolSize = poolSize + 10;
             if (globalVar.simbol > 0) poolSize = poolSize + 32;
             entropy = length * Math.Log2(poolSize);
+            return entropy.ToString("0.00");
+        }
+        public string entropyByPassword(string password)
+        {
+            string regexDigit = @"[0-9]";
+            int digitCount = Regex.Matches(password, regexDigit).Count;
+
+            string regexlowerCase = "[a-z]";
+            int lowerCaseCount = Regex.Matches(password, regexlowerCase).Count;
+
+            string regexupperCase = "[A-Z]";
+            int upperCaseCount = Regex.Matches(password, regexupperCase).Count;
+
+            string regexSimbol = "[^0-9a-zA-Z]";
+            int simbolCount = Regex.Matches(password, regexSimbol).Count;
+
+            int poolSize = 0;
+            if (lowerCaseCount > 0) poolSize = poolSize + 26;
+            if (upperCaseCount > 0) poolSize = poolSize + 26;
+            if (digitCount > 0) poolSize = poolSize + 10;
+            if (simbolCount > 0) poolSize = poolSize + 32;
+            double entropy = password.Length * Math.Log2(poolSize);
             return entropy.ToString("0.00");
         }
         public void entropyTips(string entropyValue, Label entropyLabel)
