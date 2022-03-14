@@ -25,13 +25,13 @@ namespace PasswordManagerWPF
             InitializeComponent();
             try
             {
-                globalVar.listPsw = new GetAllSavedPswQueryHandler().Retrieve();
+                globalVar.listPsw = CalculateEntropyEveryPsw(new GetAllSavedPswQueryHandler().Retrieve());
                 //savedPswDB.ItemsSource = globalVar.listPsw;
                 ColorChanger colorChanger = new ColorChanger();
                 colorChanger.applyFontSavPsw(this);
                 fontSize fontSize = new fontSize();
                 fontSize.applyFontSizeSavPsw(this);
-                savedPswDB.ItemsSource = CalculateEntropyEveryPsw(globalVar.listPsw);
+                savedPswDB.ItemsSource = globalVar.listPsw;
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace PasswordManagerWPF
             this.NavigationService.Navigate(new HomePage());
         }
         //copy function
-        private void CopyPsw(int index)
+        private void CopyPsw()
         {
             //info per password
             var cellInfoPassword = savedPswDB.SelectedCells[2];
@@ -91,10 +91,10 @@ namespace PasswordManagerWPF
         }
 
 
-        private void showPsw(int rows, int column)
+        private void showPsw()
         {
 
-            var cellInfo = savedPswDB.SelectedCells[column - 2];
+            var cellInfo = savedPswDB.SelectedCells[2];
             var contentColor = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Foreground;
             if (contentColor.ToString() == "#00FFFFFF") (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Foreground = new SolidColorBrush(Colors.Black);
             else (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Foreground = new SolidColorBrush(Colors.Transparent);
@@ -102,34 +102,33 @@ namespace PasswordManagerWPF
 
         private void savedPswDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int selectedIndex = savedPswDB.SelectedIndex;
             int selectedColum = savedPswDB.CurrentColumn.DisplayIndex;
             switch (selectedColum)
             {
                 case 4:
                     {
-                        showPsw(selectedIndex, selectedColum);
+                        showPsw();
                         break;
                     }
                 case 5:
                     {
-                        EditRow(selectedIndex);
+                        EditRow();
                         break;
                     }
                 case 6:
                     {
-                        CopyPsw(selectedIndex);
+                        CopyPsw();
                         break;
                     }
                 case 7:
                     {
-                        DeleteRow(selectedIndex);
+                        DeleteRow();
                         break;
                     }
             }
         }
 
-        private void EditRow(int selectedIndex)
+        private void EditRow()
         {
             //info per appname
             var cellInfoAppName = savedPswDB.SelectedCells[0];
@@ -152,14 +151,14 @@ namespace PasswordManagerWPF
 
         private void findFunc(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = CalculateEntropyEveryPsw(globalVar.listPsw);
+            if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = globalVar.listPsw;
             else
             {
-                savedPswDB.ItemsSource = CalculateEntropyEveryPsw(globalVar.listPsw).Where(x => Regex.Match(x.Appname, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
+                savedPswDB.ItemsSource = globalVar.listPsw.Where(x => Regex.Match(x.Appname, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
             }
         }
 
-        private void DeleteRow(int selectedIndex)
+        private void DeleteRow()
         {
             MessageBoxResult result = MessageBox.Show(LangString.messageDelete, "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
@@ -168,8 +167,8 @@ namespace PasswordManagerWPF
                 var cellInfoAppName = savedPswDB.SelectedCells[0];
                 var contentAppName = (cellInfoAppName.Column.GetCellContent(cellInfoAppName.Item) as TextBlock).Text;
 
-                var idDetail = globalVar.listPsw.Where(x => x.Appname == contentAppName).FirstOrDefault().Id
-                new DeleteDetailCommandHandler().Execute(new DeleteDetailCommand { Id = globalVar.listPsw[selectedIndex].Id });
+                var idDetail = globalVar.listPsw.Where(x => x.Appname == contentAppName).FirstOrDefault().Id;
+                new DeleteDetailCommandHandler().Execute(new DeleteDetailCommand { Id = idDetail });
                 this.NavigationService.Navigate(new SavedPassword());
             }
         }
