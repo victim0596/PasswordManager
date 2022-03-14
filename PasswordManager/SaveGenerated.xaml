@@ -1,0 +1,30 @@
+﻿<Window x:Class="PasswordManager.SaveGenerated"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PasswordManager.GVariable"
+        xmlns:gv ="clr-namespace:PasswordManager.Classes"
+        mc:Ignorable="d"
+        Title="Save Password" Height="400" Width="400"
+        Background="Black"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                <Label Name="labelApp" Content="{Binding Path=(local:LangString.appName)}" Foreground="White" FontFamily="Eras ITC" FontSize="12" Width="80"></Label>
+                <TextBox Width="150" Height="18" FontSize="12" FontFamily="Eras ITC" Margin="10,0,0,0" Name="appNameText"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                <Label Name="labelUsername" Content="Username" Foreground="White" FontFamily="Eras ITC" FontSize="12" Width="80"></Label>
+                <TextBox Width="150" Height="18" FontSize="12" FontFamily="Eras ITC" Margin="10,0,0,0" Name="usernameText"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                <Label Name="labelPsw" Content="Password" Foreground="White" FontFamily="Eras ITC" FontSize="12" Width="80"></Label>
+                <TextBox Width="150" Height="18" FontSize="12" FontFamily="Eras ITC" Margin="10,0,0,0" Name="passwordText" Text="{Binding Path=(gv:globalVar.genPsw)}"></TextBox>
+            </StackPanel>
+            <Button Margin="0,50,0,0" Content="{Binding Path=(local:LangString.addBtn)}" FontFamily="Eras ITC" FontSize="14" FontWeight="Bold" Padding="8" Width="120" Foreground="White" Style="{DynamicResource btnHome}" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Click="insertPassword"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

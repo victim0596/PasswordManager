@@ -8,7 +8,7 @@ This project created with [WPF](https://en.wikipedia.org/wiki/Windows_Presentati
 
 This application need [.NET](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) Desktop Runtime 6.0.1
 
-Download the release, and run the `PasswordManagerWPF.exe`
+Download the release, and run the `PasswordManager.exe`
 
 ## Usage
 
