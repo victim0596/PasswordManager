@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using PasswordManagerWPF.Classes;
 using PasswordManagerWPF.Components.Commands;
-using PasswordManagerWPF.DBModels;
 using PasswordManagerWPF.GVariable;
 using PasswordManagerWPF.Components.Queries;
 using PasswordManagerWPF.Domain;
@@ -57,7 +47,7 @@ namespace PasswordManagerWPF
             foreach (var item in listPsw)
             {
                 string entropyValue = new EntropyCalc().entropyByPassword(item.Password);
-                result.Add(new AccountDetailWithEntropy { Username = item.Username, Appname = item.Appname, Entropy = entropyValue });
+                result.Add(new AccountDetailWithEntropy { Username = item.Username, Appname = item.Appname, Entropy = entropyValue, Password = item.Password, Id = item.Id });
             }
             return result;
         }
@@ -93,7 +83,10 @@ namespace PasswordManagerWPF
         //copy function
         private void CopyPsw(int index)
         {
-            Clipboard.SetText(globalVar.listPsw[index].Password);
+            //info per password
+            var cellInfoPassword = savedPswDB.SelectedCells[2];
+            var contentPassword = (cellInfoPassword.Column.GetCellContent(cellInfoPassword.Item) as TextBlock).Text;
+            Clipboard.SetText(contentPassword);
             MessageBox.Show(LangString.pswCopied);
         }
 
@@ -102,10 +95,9 @@ namespace PasswordManagerWPF
         {
 
             var cellInfo = savedPswDB.SelectedCells[column - 2];
-            var content = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text;
-
-            if (content == string.Empty) (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text = globalVar.listPsw[rows].Password;
-            else (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Text = string.Empty;
+            var contentColor = (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Foreground;
+            if (contentColor.ToString() == "#00FFFFFF") (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Foreground = new SolidColorBrush(Colors.Black);
+            else (cellInfo.Column.GetCellContent(cellInfo.Item) as TextBlock).Foreground = new SolidColorBrush(Colors.Transparent);
         }
 
         private void savedPswDoubleClick(object sender, MouseButtonEventArgs e)
@@ -145,21 +137,25 @@ namespace PasswordManagerWPF
             //info per username
             var cellInfoUsername = savedPswDB.SelectedCells[1];
             var contentUsername = (cellInfoUsername.Column.GetCellContent(cellInfoUsername.Item) as TextBlock).Text;
+            //info per password
+            var cellInfoPassword = savedPswDB.SelectedCells[2];
+            var contentPassword = (cellInfoPassword.Column.GetCellContent(cellInfoPassword.Item) as TextBlock).Text;
+
 
             globalVar.appNameDetail = contentAppName;
-            globalVar.passwordDetail = globalVar.listPsw[selectedIndex].Password;
+            globalVar.passwordDetail = contentPassword;
             globalVar.usernameDetail = contentUsername;
-            globalVar.idRowDetail = globalVar.listPsw[selectedIndex].Id;
+            globalVar.idRowDetail = globalVar.listPsw.Where(x => x.Appname == contentAppName).FirstOrDefault().Id;
             EditDetail editDetail = new EditDetail();
             editDetail.ShowDialog();
         }
 
         private void findFunc(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = globalVar.listPsw;
+            if (string.IsNullOrEmpty(searchText.Text)) savedPswDB.ItemsSource = CalculateEntropyEveryPsw(globalVar.listPsw);
             else
             {
-                savedPswDB.ItemsSource = globalVar.listPsw.Where(x => Regex.Match(x.Appname, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
+                savedPswDB.ItemsSource = CalculateEntropyEveryPsw(globalVar.listPsw).Where(x => Regex.Match(x.Appname, searchText.Text, RegexOptions.IgnoreCase).Success).ToList();
             }
         }
 
@@ -168,6 +164,11 @@ namespace PasswordManagerWPF
             MessageBoxResult result = MessageBox.Show(LangString.messageDelete, "", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
+                //info per appname
+                var cellInfoAppName = savedPswDB.SelectedCells[0];
+                var contentAppName = (cellInfoAppName.Column.GetCellContent(cellInfoAppName.Item) as TextBlock).Text;
+
+                var idDetail = globalVar.listPsw.Where(x => x.Appname == contentAppName).FirstOrDefault().Id
                 new DeleteDetailCommandHandler().Execute(new DeleteDetailCommand { Id = globalVar.listPsw[selectedIndex].Id });
                 this.NavigationService.Navigate(new SavedPassword());
             }
