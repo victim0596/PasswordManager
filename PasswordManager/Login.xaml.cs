@@ -25,6 +25,7 @@ namespace PasswordManager
     /// </summary>
     public partial class Login : Page
     {
+        public bool isMessageBoxOpen = false;
         public Login()
         {
             dbClass dbClass = new dbClass();
@@ -52,6 +53,7 @@ namespace PasswordManager
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    this.isMessageBoxOpen = true;
                 }
             }
 
@@ -59,6 +61,11 @@ namespace PasswordManager
         //keyup with enter in login button
         private void loginBtnKeyUp(object sender, KeyEventArgs e)
         {
+            if(isMessageBoxOpen)
+            {
+                this.isMessageBoxOpen = false;
+                return;
+            }
             if (e.Key == Key.Return)
             {
                 this.loginBtn(sender, e);
