@@ -12,6 +12,9 @@ using PasswordManager.Components.Commands;
 using PasswordManager.GVariable;
 using PasswordManager.Components.Queries;
 using PasswordManager.Domain;
+using OfficeOpenXml;
+using System.IO;
+using System.Drawing;
 
 namespace PasswordManager
 {
@@ -170,6 +173,53 @@ namespace PasswordManager
                 var idDetail = globalVar.listPsw.Where(x => x.Appname == contentAppName).FirstOrDefault().Id;
                 new DeleteDetailCommandHandler().Execute(new DeleteDetailCommand { Id = idDetail });
                 this.NavigationService.Navigate(new SavedPassword());
+            }
+        }
+
+        private void exportExcelGrid(object sender, EventArgs e)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                try
+                {
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Password");
+                    DataTable dt = new DataTable("Dettaglio Password");
+                    dt.Columns.Add("AppName", typeof(string));
+                    dt.Columns.Add("Username", typeof(string));
+                    dt.Columns.Add("Password", typeof(string));
+                    var listaPsw = savedPswDB.ItemsSource;
+                    foreach (AccountDetailWithEntropy psw in listaPsw)
+                    {
+                        DataRow row = dt.NewRow();
+                        row["AppName"] = psw.Appname;
+                        row["Password"] = psw.Password;
+                        row["Username"] = psw.Username;
+                        dt.Rows.Add(row);
+                    }
+                    ws.Cells["A1"].LoadFromDataReader(dt.CreateDataReader(), true);
+                    //configurazione
+                    ws.Cells["A1:C1"].AutoFilter = true;
+                    ws.Cells["A1:C1"].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    ws.Cells["A1:C1"].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.RoyalBlue);
+                    ws.Cells["A1:C1"].Style.Font.Color.SetColor(System.Drawing.Color.White);
+                    ws.Cells["A1:C1"].Style.Font.Bold = true;
+                    ws.Column(1).Width = 50;
+                    ws.Column(2).Width = 50; 
+                    ws.Column(3).Width = 50;
+
+
+                    Stream s = new MemoryStream(pck.GetAsByteArray());
+                    var fileStream = File.Create(globalVar.excelPath + "\\pswExcel.xlsx");
+                    s.Seek(0, SeekOrigin.Begin);
+                    s.CopyTo(fileStream);
+                    fileStream.Close();
+                    MessageBox.Show("Done");
+                }catch(Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+                
             }
         }
 

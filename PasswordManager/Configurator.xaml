@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordManager.GVariable"
+        xmlns:localClasses="clr-namespace:PasswordManager.Classes"
         mc:Ignorable="d"
         Title="Configurator" Height="300" Width="600"
         ResizeMode="NoResize"
@@ -51,7 +52,12 @@
                     <ComboBoxItem Content="x1,6"/>
                 </ComboBox>
             </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Path Excel: " Foreground="White" FontFamily="Eras ITC" FontSize="12" Margin="0,0,4,0"></Label>
+                <Label Content="{Binding Path=(localClasses:globalVar.excelPath)}" Foreground="White" FontWeight="Bold" FontFamily="Eras ITC" FontSize="12" Margin="0,0,4,0"></Label>
+            </StackPanel>
         </StackPanel>
+        
         <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="20">
             <Button Click="saveBtn" Content="{Binding Path=(local:LangString.saveBtn)}" FontSize="15" FontFamily="Eras ITC" Padding="7" Background="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}" Foreground="White" Style="{DynamicResource btnHome}"></Button>
         </StackPanel>

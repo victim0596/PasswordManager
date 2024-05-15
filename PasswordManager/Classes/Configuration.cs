@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PasswordManager.Classes
@@ -14,6 +16,7 @@ namespace PasswordManager.Classes
         public string fontColor { get; set; }
 
         public string fontSize { get; set; }
+        public string excelPath { get; set; }
 
         public void loadConfig(MainWindow mainWindow)
         {
@@ -33,6 +36,16 @@ namespace PasswordManager.Classes
             //load fontSize
             fontSize fontSize = new fontSize();
             fontSize.loadFontSize();
+
+            //excel path
+            string jsonString = File.ReadAllText("config.json");
+            Configuration config = JsonSerializer.Deserialize<Configuration>(jsonString);
+            if (config != null)
+            {
+                globalVar.excelPath = config.excelPath;
+            }
+            
+            
         }
     }
 }
