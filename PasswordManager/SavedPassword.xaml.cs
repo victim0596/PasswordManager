@@ -208,14 +208,24 @@ namespace PasswordManager
                     ws.Column(2).Width = 50; 
                     ws.Column(3).Width = 50;
 
+                    //salvataggio
+                    Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                    dlg.FileName = "PswExcel"; 
+                    dlg.DefaultExt = ".xlsx"; 
+                    dlg.Filter = "Excel documents (.xlsx)|*.xlsx";
+                    Nullable<bool> result = dlg.ShowDialog();
+                    if (result == true)
+                    {
+                        string pathToSave = dlg.FileName;
+                        Stream s = new MemoryStream(pck.GetAsByteArray());
+                        var fileStream = File.Create(pathToSave);
+                        s.Seek(0, SeekOrigin.Begin);
+                        s.CopyTo(fileStream);
+                        fileStream.Close();
+                    }
 
-                    Stream s = new MemoryStream(pck.GetAsByteArray());
-                    var fileStream = File.Create(globalVar.excelPath + "\\pswExcel.xlsx");
-                    s.Seek(0, SeekOrigin.Begin);
-                    s.CopyTo(fileStream);
-                    fileStream.Close();
-                    MessageBox.Show("Done");
-                }catch(Exception ex)
+                }
+                catch(Exception ex)
                 {
                     MessageBox.Show($"Error: {ex.Message}");
                 }

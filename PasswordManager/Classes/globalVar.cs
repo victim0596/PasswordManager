@@ -23,7 +23,6 @@ namespace PasswordManager.Classes
         public static string colorBG;
         public static string colorFG;
         public static string sizeFont;
-        public static string excelPath { get; set; }
         //for saved password 
         public static string genPsw { get; set; }
         //saved psw

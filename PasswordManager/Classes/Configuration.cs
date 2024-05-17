@@ -36,16 +36,7 @@ namespace PasswordManager.Classes
             //load fontSize
             fontSize fontSize = new fontSize();
             fontSize.loadFontSize();
-
-            //excel path
-            string jsonString = File.ReadAllText("config.json");
-            Configuration config = JsonSerializer.Deserialize<Configuration>(jsonString);
-            if (config != null)
-            {
-                globalVar.excelPath = config.excelPath;
-            }
-            
-            
+ 
         }
     }
 }
