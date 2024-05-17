@@ -223,7 +223,7 @@ namespace PasswordManager
                         s.CopyTo(fileStream);
                         fileStream.Close();
                     }
-
+                    MessageBox.Show("Done");
                 }
                 catch(Exception ex)
                 {
